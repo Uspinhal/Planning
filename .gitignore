@@ -1,0 +1,4 @@
+/planning/database/*.*
+/venv/
+/planning/tests/
+/.idea
