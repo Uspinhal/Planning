@@ -3,15 +3,18 @@ from csv import DictWriter, DictReader
 
 
 class Conta:
-    def __init__(self, nome: str, banco: str, numero: int = 0, saldo: float = 0.0):
-        self.__nome = nome
-        self.__banco = banco
-        self.__numero = numero
+    def __init__(self, numero: int = 0, nome: str = "", banco: str = "", saldo: float = 0.0):
         self.__file = 'database/contas.csv'
-        if numero == 0.0:
-            self.__saldo = 0.0
-        else:
+        if self.existeConta(numero):
+            self.__numero = numero
+            self.__nome = self._carregaConta().loc[self._carregaConta()["Conta"] == self.numero, "Nome"]
+            self.__banco = self._carregaConta().loc[self._carregaConta()["Conta"] == self.numero, "Banco"]
             self.__saldo = self._carregaConta().loc[self._carregaConta()["Conta"] == self.numero, "Saldo"]
+        else:
+            self.__numero = numero
+            self.__nome = nome
+            self.__banco = banco
+            self.__saldo = 0.0
         
     @property
     def numero(self):
@@ -34,6 +37,19 @@ class Conta:
         df = pd.read_csv('database/contas.csv')
         return df
     
+    def existeConta(self, numero: int) -> bool:
+        """
+        Retorna True se existe uma conta e False se não existe
+        :param numero: int
+        :return: bool
+        """
+        df = self._carregaConta()
+        selecao = df.loc[df['Conta'] == numero]
+        if selecao.empty:
+            return False
+        else:
+            return True
+        
     def debito(self, valor) -> float:
         self.__saldo -= valor
         return self.__saldo

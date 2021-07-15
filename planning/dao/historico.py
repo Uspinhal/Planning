@@ -1,7 +1,6 @@
 # import datetime
 # from csv import writer
 from csv import DictWriter
-from planning.dao.conta import Conta
 
 
 class Historico:
