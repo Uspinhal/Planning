@@ -5,6 +5,8 @@ from time import sleep
 from dao.historico import Historico
 from gui.userInterface import UserInterface
 from planning.dao.conta import Conta
+from planning.gui.userInterface import menuInicial
+from planning.utils.utils import formata_float_str_moeda as fmt
 
 
 def main() -> None:
@@ -21,44 +23,39 @@ def main() -> None:
     movimentacao(arquivo, conta, data, desc, valor, mov)
     """
     c = menuInicial()
+    
     while c != 0:
         if c == 1:
+            # TODO: Inserir método para criar conta
             print('1 - Criar conta')
             sleep(2)
             c = menuInicial()
         elif c == 2:
+            # TODO: Inserir método para fazer os lançamentos
             print('2 - Efetuar lançamento')
+            gui.lancamentoGUI()
             sleep(2)
             c = menuInicial()
         elif c == 3:
-            print('3 - Consultar saldo')
             menuSaldo()
-            sleep(2)
             c = menuInicial()
 
     print('Saindo...')
     sleep(2)
     
 
-def menuInicial() -> int:
-    ui = UserInterface()
-    ui.mainInterface()
-    opcao = int(input(">> "))
-    return opcao
-
-
 def menuSaldo() -> None:
     df = pd.read_csv('database/contas.csv')
-    ui = UserInterface()
-    ui.saldoGUI(df)
+    gui.saldoGUI(df)
     c = int(input('>>'))
     conta = Conta(c)
-    print(f'Seu saldo é: {conta.saldo}')
+    print(f'Seu saldo é: {fmt(conta.saldo)}')
+    espera = input("Pressione qualquer tecla para continuar...")
     
 
 def movimentacao(arquivo: str, conta: Conta, data: str, desc: str, valor: float, mov: str) -> None:
     movements = Historico(arquivo, conta.numero, data, desc, valor, mov)
-    movements.movimento()
+    movements.registro()
     conta.atualizaSaldo(valor, mov)
     
 
@@ -70,6 +67,7 @@ def aux() -> None:
     
 
 if __name__ == '__main__':
+    gui = UserInterface(user='ADM')
     operacao = True
     if operacao:
         main()

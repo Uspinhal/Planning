@@ -31,7 +31,11 @@ class Historico:
     def movimentacao(self) -> str:
         return self.__movimentacao
 
-    def movimento(self) -> None:
+    def registro(self) -> None:
+        """
+        Faz o registros das operações
+        :return: None
+        """
         with open(self.__file, 'a', newline='') as arquivo:
             cabecalho = ['Data', 'Histórico', 'Valor', 'Conta', 'Operação']
             escritor_csv = DictWriter(arquivo, fieldnames=cabecalho)

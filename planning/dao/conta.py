@@ -1,5 +1,5 @@
 import pandas as pd
-from csv import DictWriter, DictReader
+from csv import DictWriter
 
 
 class Conta:
@@ -9,27 +9,27 @@ class Conta:
             self.__numero = numero
             self.__nome = self._carregaConta().loc[self._carregaConta()["Conta"] == self.numero, "Nome"]
             self.__banco = self._carregaConta().loc[self._carregaConta()["Conta"] == self.numero, "Banco"]
-            self.__saldo = self._carregaConta().loc[self._carregaConta()["Conta"] == self.numero, "Saldo"]
+            self.__saldo = float(self._carregaConta().loc[self._carregaConta()["Conta"] == self.numero, "Saldo"])
         else:
             self.__numero = numero
             self.__nome = nome
             self.__banco = banco
-            self.__saldo = 0.0
+            self.__saldo = saldo
         
     @property
-    def numero(self):
+    def numero(self) -> int:
         return self.__numero
         
     @property
-    def nome(self):
+    def nome(self) -> str:
         return self.__nome
     
     @property
-    def banco(self):
+    def banco(self) -> str:
         return self.__banco
     
     @property
-    def saldo(self):
+    def saldo(self) -> float:
         return self.__saldo
     
     @classmethod
