@@ -89,7 +89,7 @@ class Conta:
         df = self._carregaConta()
         df.loc[df["Conta"] == self.numero, "Saldo"] = saldo
         df.to_csv(self.__file, index=False)
-        print(df.head())
+        print(f'Saldo atualizado com sucesso!\nNovo saldo: {saldo}')
      
     def procuraConta(self, numero: int) -> dict:
         pass

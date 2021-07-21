@@ -4,7 +4,7 @@ from csv import DictWriter
 
 
 class Historico:
-    def __init__(self, file: str, conta: int, data: str, desc: str, valor: float, movimentacao: str):
+    def __init__(self, conta: int, data: str, desc: str, valor: float, movimentacao: str, file: str = 'database/historico.csv'):
         """
         Inicializador da classe DataBase
         """
@@ -41,10 +41,8 @@ class Historico:
             escritor_csv = DictWriter(arquivo, fieldnames=cabecalho)
             escritor_csv.writerow({"Data": self.data, "Histórico": self.desc, "Valor": self.valor,
                                    "Conta": self.__conta, "Operação": self.movimentacao})
-        
 
-
-        print(f'Data: {self.data} | Histórico: {self.desc} | Valor: R${self.valor}')
+        print(f'Data: {self.data} | Histórico: {self.desc} | Valor: R${self.valor} - {self.movimentacao}')
 
 
 """

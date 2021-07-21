@@ -2,12 +2,6 @@ import pandas
 import os
 
 
-def menuInicial() -> int:
-    UserInterface().mainInterface()
-    opcao = int(input(">> "))
-    return opcao
-
-
 class UserInterface:
     """
     Classe de Interface com o usuário
@@ -42,14 +36,13 @@ class UserInterface:
         Tela de lançamentos
         :return: None
         """
-        # TODO: Criar GUI para os lançamentos
         os.system('cls')
         print('=====================================')
         print('============== Planning =============')
         print('============= Lançamentos ===========')
         print('=====================================')
-        print()
-        print(f'Bem vindo: {self.user}')
+        print(f'Bem vindo: {self.user}\n')
+        print('Escolha uma operação:\n1 - Saque\n2 - Depósito')
     
     def saldoGUI(self, df: pandas.DataFrame) -> None:
         """
@@ -62,7 +55,6 @@ class UserInterface:
         print('============== Planning =============')
         print('=============== SALDO ===============')
         print('=====================================')
-        print()
-        print(f'Usuário: {self.user}')
+        print(f'Usuário: {self.user}\n')
         print('Escolha a conta para consultar o saldo: ')
         print(df[['Conta', 'Nome']])
