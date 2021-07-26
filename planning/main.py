@@ -1,11 +1,11 @@
-# import datetime
 import pandas as pd
+import os
 from time import sleep
 
 from dao.historico import Historico
 from gui.userInterface import UserInterface
-from planning.dao.conta import Conta
-from planning.utils.utils import formata_float_str_moeda as fmt
+from dao.conta import Conta
+from utils.utils import formata_float_str_moeda as fmt
 
 # TODO: Fazer o tratamento de erro
 
@@ -54,7 +54,9 @@ def menuLancamento() -> None:
 
 
 def menuSaldo() -> None:
-    df = pd.read_csv('database/contas.csv')
+    path = os.getcwd()
+    file = path + '\\database\\contas.csv'
+    df = pd.read_csv(file)
     gui.saldoGUI(df)
     c = int(input('>>'))
     conta = Conta(c)
@@ -64,10 +66,10 @@ def menuSaldo() -> None:
 
 def aux() -> None:
     conta: Conta = Conta(numero=1)
-    # conta.criaConta()
-    # print('done')
     print(conta.existeConta(1))
-    
+    path = os.getcwd()
+    file =path + '\\database\\contas.csv'
+    print(file)
 
 if __name__ == '__main__':
     gui = UserInterface(user='ADM')

@@ -1,10 +1,11 @@
 # import datetime
 # from csv import writer
+import os
 from csv import DictWriter
 
-
+_path = os.getcwd() + '\\database\\historico.csv'
 class Historico:
-    def __init__(self, conta: int, data: str, desc: str, valor: float, movimentacao: str, file: str = 'database/historico.csv'):
+    def __init__(self, conta: int, data: str, desc: str, valor: float, movimentacao: str, file: str = _path):
         """
         Inicializador da classe DataBase
         """

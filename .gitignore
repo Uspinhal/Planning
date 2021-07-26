@@ -1,4 +1,8 @@
 /planning/database/*.*
 /venv/
 /planning/tests/
+/planning/__pycache__/
+/planning/bin/
+/logs
 /.idea
+*.pyc

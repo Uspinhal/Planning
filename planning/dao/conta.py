@@ -1,10 +1,11 @@
 import pandas as pd
+import os
 from csv import DictWriter
+from time import sleep
 
-
+_file = os.getcwd() + '\\database\\contas.csv'
 class Conta:
     def __init__(self, numero: int = 0, nome: str = "", banco: str = "", saldo: float = 0.0):
-        self.__file = 'database/contas.csv'
         if self.existeConta(numero):
             self.__numero = numero
             self.__nome = self._carregaConta().loc[self._carregaConta()["Conta"] == self.numero, "Nome"]
@@ -34,7 +35,7 @@ class Conta:
     
     @classmethod
     def _carregaConta(cls) -> pd.DataFrame:
-        df = pd.read_csv('database/contas.csv')
+        df = pd.read_csv(_file)
         return df
     
     def existeConta(self, numero: int) -> bool:
@@ -65,7 +66,7 @@ class Conta:
         """
         df = self._carregaConta()
         self.__numero = df["Conta"].max() + 1
-        with open(self.__file, 'a', newline='') as arquivo:
+        with open(_file, 'a', newline='') as arquivo:
             cabecalho = ['Conta', 'Banco', 'Nome', 'Saldo']
             escritor_csv = DictWriter(arquivo, fieldnames=cabecalho)
             escritor_csv.writerow({"Conta": self.numero, "Banco": self.banco, "Nome": self.nome, "Saldo": self.saldo})
@@ -88,8 +89,10 @@ class Conta:
         
         df = self._carregaConta()
         df.loc[df["Conta"] == self.numero, "Saldo"] = saldo
-        df.to_csv(self.__file, index=False)
+        df.to_csv(_file, index=False)
         print(f'Saldo atualizado com sucesso!\nNovo saldo: {saldo}')
+        sleep(2)
      
     def procuraConta(self, numero: int) -> dict:
+        """TODO: Falta implementar"""
         pass
