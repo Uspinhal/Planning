@@ -55,7 +55,7 @@ def menuLancamento() -> None:
 
 def menuSaldo() -> None:
     path = os.getcwd()
-    file = path + '\\database\\contas.csv'
+    file = path + '\\planning\\database\\contas.csv'
     df = pd.read_csv(file)
     gui.saldoGUI(df)
     c = int(input('>>'))
@@ -72,7 +72,7 @@ def aux() -> None:
     print(file)
 
 if __name__ == '__main__':
-    gui = UserInterface(user='ADM')
+    gui = UserInterface(user='Rodrigo')
     operacao = True
     if operacao:
         main()

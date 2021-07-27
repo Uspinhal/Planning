@@ -1,15 +1,12 @@
-# import datetime
-# from csv import writer
 import os
 from csv import DictWriter
 
-_path = os.getcwd() + '\\database\\historico.csv'
+_path = os.getcwd() + '\\planning\\database\\historico.csv'
 class Historico:
-    def __init__(self, conta: int, data: str, desc: str, valor: float, movimentacao: str, file: str = _path):
+    def __init__(self, conta: int, data: str, desc: str, valor: float, movimentacao: str):
         """
         Inicializador da classe DataBase
         """
-        self.__file = file
         self.__data = data
         self.__desc = desc
         self.__valor = valor
@@ -37,7 +34,7 @@ class Historico:
         Faz o registros das operações
         :return: None
         """
-        with open(self.__file, 'a', newline='') as arquivo:
+        with open(_path, 'a', newline='') as arquivo:
             cabecalho = ['Data', 'Histórico', 'Valor', 'Conta', 'Operação']
             escritor_csv = DictWriter(arquivo, fieldnames=cabecalho)
             escritor_csv.writerow({"Data": self.data, "Histórico": self.desc, "Valor": self.valor,
@@ -45,11 +42,3 @@ class Historico:
 
         print(f'Data: {self.data} | Histórico: {self.desc} | Valor: R${self.valor} - {self.movimentacao}')
 
-
-"""
-    def criaArquivo(self, path, file):
-        with open(path+file+".csv", 'w',newline='') as arquivo:
-            cabecalho = ['Data', 'Histórico', 'Valor']
-            escritor_csv = DictWriter(arquivo, fieldnames=cabecalho)
-            escritor_csv.writeheader()
-"""

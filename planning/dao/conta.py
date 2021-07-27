@@ -3,7 +3,7 @@ import os
 from csv import DictWriter
 from time import sleep
 
-_file = os.getcwd() + '\\database\\contas.csv'
+_file = os.getcwd() + '\\planning\\database\\contas.csv'
 class Conta:
     def __init__(self, numero: int = 0, nome: str = "", banco: str = "", saldo: float = 0.0):
         if self.existeConta(numero):
